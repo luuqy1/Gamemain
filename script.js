@@ -34,10 +34,10 @@ function animate() {
         spawnRandomObject();
     }
 
-
+    // calculate the bounds of the paddle
     var paddleLeft = paddleX;
     var paddleRight = paddleX + paddleWidth;
-    var paddleTop = paddleY
+    var paddleTop = paddleY;
     var paddleBottom = paddleY + paddleHeight;
 
     for (var i = 0; i < objects.length; i++) {
@@ -50,7 +50,36 @@ function animate() {
         ctx.fillStyle = object.type;
         ctx.fill();
 
+        //Collision code starts here           
 
+        // calculate bounds of this ball
+        var objectTop = object.y - object.r;
+        var objectBottom = object.y + object.r;
+        var objectLeft = object.x - object.r;
+        var objectRight = object.x + object.r;
+
+        // Collision test: Part 1
+        // Has the ball not yet reached the paddle?
+        if (objectBottom < paddleY) {
+            // no collision yet so no collision is happening
+            continue;
+        }
+        // Collision test: Part 2
+        // Has the ball already passed below the paddle?
+        if (objectTop > paddleBottom) {
+            // the ball is under the paddle so no collision is happening
+            continue;
+        }
+        // Collision test: Part 3
+        // Is the ball now horizontally over the paddle?
+        if (objectRight > paddleLeft && objectLeft < paddleRight) {
+            // ball is colliding with paddle
+            // end the game
+            clearInterval(theInterval);
+            alert('Ball collided with paddle +1 score');
+        }
+
+        //Collsion code ends here
     }
 }
 
@@ -58,7 +87,7 @@ function animate() {
 
 var canvas = document.getElementById("canvas1");
 var ctx = canvas.getContext("2d");
-var paddleHeight = 15;
+var paddleHeight = 20;
 var paddleWidth = 70;
 var paddleY = 690
 var paddleX = (canvas.width - paddleWidth) / 2;
@@ -97,10 +126,10 @@ function drawPaddle() {
 
 function move() {
     if (rightPressed && paddleX < canvas.width - paddleWidth) {
-        paddleX += 5;
+        paddleX += 7;
     }
     else if (leftPressed && paddleX > 0) {
-        paddleX -= 5;
+        paddleX -= 7;
     }
 }
 
@@ -114,4 +143,4 @@ function draw() {
 }
 
 
-var theInterval = setInterval(draw, 20);
+var theInterval = setInterval(draw, 25);
