@@ -1,31 +1,10 @@
-body 
-{
-height: 100vh;
-padding: 10px 25px;
-text-align: center;
-background-image: radial-gradient(circle, yellow, yellow, green);
-height: 60px;
-}
-#canvas1 
-{
-border-radius: 1px;
-position: absolute;
-left: 50%;
-top: 50%;
-transform: translate(-50%, -50%);
-background-image: url("background.jpg");
-background-repeat: no-repeat;
-background-position: center;
-background-size: 100% 100%;
-}
-  
- 
-  
-    
-    
-    
-    
-     
+ canvas {
+        border: 1px solid black;
+        position: absolute;
+        background-color: transparent;
 
- 
-
+    }
+    body {
+        margin-left: 15%;
+        margin-top: 3%;
+    }
